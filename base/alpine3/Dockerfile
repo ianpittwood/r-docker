@@ -1,4 +1,4 @@
-FROM ubuntu:jammy
+FROM alpine:3
 
 LABEL maintainer="RStudio Docker <docker@rstudio.com>"
 
@@ -8,25 +8,17 @@ ENV LANG C.UTF-8
 # Set default timezone
 ENV TZ UTC
 
-RUN apt-get update -qq && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y \
-    apt-transport-https \
+RUN apk add --no-cache \
     curl \
     fontconfig \
-    libcurl4-openssl-dev \
-    locales \
+    curl-dev \
+    gcc \
+    gzip \
+    #locales \
     perl \
     sudo \
     tzdata \
-    wget && \
-    rm -rf /var/lib/apt/lists/*
-
-# Install TinyTeX
-RUN wget -qO- "https://yihui.org/tinytex/install-bin-unix.sh" | sh && \
-    /root/.TinyTeX/bin/*/tlmgr path remove && \
-    mv /root/.TinyTeX/ /opt/TinyTeX && \
-    /opt/TinyTeX/bin/*/tlmgr option sys_bin /usr/local/bin && \
-    /opt/TinyTeX/bin/*/tlmgr path add
+    wget
 
 # Install pandoc
 RUN mkdir -p /opt/pandoc && \
@@ -38,3 +30,10 @@ RUN mkdir -p /opt/pandoc && \
     gzip -d /opt/pandoc/pandoc-citeproc.gz && \
     chmod +x /opt/pandoc/pandoc-citeproc && \
     ln -s /opt/pandoc/pandoc-citeproc /usr/bin/pandoc-citeproc
+
+# Install TinyTeX
+RUN wget -qO- "https://yihui.name/gh/tinytex/tools/install-unx.sh" | sh && \
+    /root/.TinyTeX/bin/*/tlmgr path remove && \
+    mv /root/.TinyTeX/ /opt/TinyTeX && \
+    /opt/TinyTeX/bin/*/tlmgr option sys_bin /usr/local/bin && \
+    /opt/TinyTeX/bin/*/tlmgr path add

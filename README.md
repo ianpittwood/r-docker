@@ -42,16 +42,18 @@ The images follow these tag patterns:
 
 The following distributions are supported:  
 
-| Distribution  | Full Name |
-| ------------- |-----------|
-| bionic        | Ubuntu 18.04 |
-| focal         | Ubuntu 20.04 |
-| jammy         | Ubuntu 22.04 |
-| centos7       | CentOS 7 |
-| rockylinux8   | Rocky Linux 8 |
-| rockylinux9   | Rocky Linux 9 |
-| opensuse153   | openSUSE 15.3 |
-| opensuse154   | openSUSE 15.4 |
+| Distribution | Full Name     |
+|--------------|---------------|
+| bionic       | Ubuntu 18.04  |
+| focal        | Ubuntu 20.04  |
+| jammy        | Ubuntu 22.04  |
+| centos7      | CentOS 7      |
+| rockylinux8  | Rocky Linux 8 |
+| rockylinux9  | Rocky Linux 9 |
+| almalinux8   | AlmaLinux 8   |
+| almalinux9   | AlmaLinux 9   |
+| opensuse153  | openSUSE 15.3 |
+| opensuse154  | openSUSE 15.4 |
 
 All minor versions of R since 3.1 are supported, on the latest patch release.
 

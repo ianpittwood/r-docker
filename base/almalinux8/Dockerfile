@@ -1,25 +1,16 @@
-FROM ubuntu:jammy
-
+FROM almalinux:8
 LABEL maintainer="RStudio Docker <docker@rstudio.com>"
 
-# Set default locale
-ENV LANG C.UTF-8
-
-# Set default timezone
-ENV TZ UTC
-
-RUN apt-get update -qq && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y \
-    apt-transport-https \
-    curl \
+RUN dnf -y update && \
+    dnf -y install \
     fontconfig \
-    libcurl4-openssl-dev \
-    locales \
-    perl \
+    glibc-langpack-en \
+    perl-Digest-MD5 \
+    perl-Getopt-Long \
     sudo \
-    tzdata \
+    vim \
     wget && \
-    rm -rf /var/lib/apt/lists/*
+    dnf clean all
 
 # Install TinyTeX
 RUN wget -qO- "https://yihui.org/tinytex/install-bin-unix.sh" | sh && \
@@ -38,3 +29,9 @@ RUN mkdir -p /opt/pandoc && \
     gzip -d /opt/pandoc/pandoc-citeproc.gz && \
     chmod +x /opt/pandoc/pandoc-citeproc && \
     ln -s /opt/pandoc/pandoc-citeproc /usr/bin/pandoc-citeproc
+
+# Set default locale
+ENV LANG en_US.UTF-8
+
+# Set default timezone
+ENV TZ UTC

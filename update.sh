@@ -21,6 +21,8 @@ declare -A os_identifiers=(
     [centos7]='centos-7'
     [rockylinux8]='centos-8'
     [rockylinux9]='rhel-9'
+    [almalinux8]='centos-8'
+    [almalinux9]='rhel-9'
     [opensuse153]='opensuse-153'
     [opensuse154]='opensuse-154'
 )
@@ -45,9 +47,11 @@ for version in "${!r_versions[@]}"; do
         case "$variant" in
             bionic|focal|jammy) template='ubuntu'
             ;;
-            centos7|rockylinux8) template='centos'
+            centos7|rockylinux8|almalinux8) template='centos'
             ;;
             rockylinux9) template='rockylinux'
+            ;;
+            almalinux9) template="almalinux"
             ;;
             opensuse153|opensuse154) template='opensuse'
             ;;
